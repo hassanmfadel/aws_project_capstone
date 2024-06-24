@@ -74,5 +74,22 @@ try:
                     },],
                 'ToPort': 443,
         },],)
+    client_obj.authorize_security_group_egress(
+        GroupId=group_id,
+        IpPermissions=[
+            {
+                'FromPort': 443,
+                'IpProtocol': 'tcp',
+                'IpRanges': [
+                    {
+                        'CidrIp': '10.0.0.0/16',
+                    },
+                ],
+                'ToPort': 443,
+            },
+        ],
+    )
+
+    print(response)
 except Exception as e:
     print(e)
