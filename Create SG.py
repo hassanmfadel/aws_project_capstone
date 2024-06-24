@@ -83,6 +83,7 @@ try:
                 'IpRanges': [
                     {
                         'CidrIp': '10.0.0.0/16',
+                        'Description': 'allow outbound https for updates',
                     },
                 ],
                 'ToPort': 443,
