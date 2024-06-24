@@ -6,11 +6,19 @@ resource_obj=boto3.resource(service_name='ec2',region_name='us-east-1')
 
 vpc_id='vpc-07def5e85a7b039ea'
 try:
+    # #waiter = client_obj.get_waiter('security_group_exists')
     response = client_obj.create_security_group(
         Description='SG for aws project',
         GroupName='web-sg',
         VpcId=vpc_id)
 
+    # waiter.wait(
+    #     Filters=[
+    #         {
+    #             'Name': 'group-name',
+    #             'Values': ['web_sg']
+    #         }
+    #     ])
     response_sg = client_obj.describe_security_groups(
         Filters=[
             {
@@ -19,9 +27,10 @@ try:
             }
         ]
     )
-    group_id=response_sg['SecurityGroups'][0]['GroupId']
-    #pprint(response_sg)
-    #print(group_id)
+    pprint(response_sg)
+    group_id = response_sg['SecurityGroups'][0]['GroupId']
+    # #pprint(response_sg)
+    print(group_id)
 
 
     client_obj.authorize_security_group_ingress(
